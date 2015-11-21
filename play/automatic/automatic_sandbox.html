@@ -38,9 +38,16 @@
 			<div id="slider2"></div>
 			<br>
 
+			<div class="radio" id="algo-picker">
+			<form action="">
+				<input type="radio" name="algorithm" value="random">Random<br>
+				<input type="radio" name="algorithm" value="happiness">Happiness<br>
+				<input type="radio" name="algorithm" value="collective-happiness">Collective Happiness
+			</form>
+
+			</div>
 			<div class="ui" id="moving" onclick="START_SIM=!START_SIM; doneBuffer = 60; window.writeStats()"></div>
 			<div class="ui" id="reset" onclick="reset()" style="margin-left:9px"></div>
-
 		</div>
 	</div>
 </body>
