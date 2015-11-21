@@ -21,5 +21,5 @@ Tweet us at
 
 ---
 
-This fork adds pentagons in the style shown in the picture at the bottom.
+This fork adds circles in the style shown in the picture at the bottom.
 ![](./play/img/yay_pentagon.png)
