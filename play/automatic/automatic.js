@@ -430,7 +430,21 @@ function isDone(){
 	return true;
 }
 
-function step(){
+function step() {
+
+	// Stores which algorithm is selected
+	// 0 for random					id : #random
+	// 1 for happiness				id : #happiness
+	// 2 for collective happiness	id : #collective
+	var selectedAlgo = 0;
+	if(document.getElementById("happiness").checked) {
+		selectedAlgo = 1;
+	} else if(document.getElementById("collective").checked) {
+		selectedAlgo = 2;
+	}
+
+	// Was used to test algorithm selected
+	//console.log(selectedAlgo);
 
 	// Get all shakers
 	var shaking = [];
