@@ -482,6 +482,8 @@ function step() {
 				empties.push(spot);
 			}
 			else if (!spotTaken && selectedAlgo == 1) {
+			    var neighbors = 0;
+			    var same = 0;
 			    for (var i = 0; i < draggables.length; i++) {
 			        var t = draggables[i];
 			        if (d == t) continue;
