@@ -478,9 +478,35 @@ function step() {
 				}
 			}
 
-			if(!spotTaken){
+			if(!spotTaken && selectedAlgo == 0){
 				empties.push(spot);
 			}
+			else if (!spotTaken && selectedAlgo == 1) {
+			    var neighbors = 0;
+			    var same = 0;
+			    for (var i = 0; i < draggables.length; i++) {
+			        var t = draggables[i];
+			        if (d == t) continue;
+			        if (dx * dx + dy * dy < DIAGONAL_SQUARED) {
+			            neighbors++;
+			            if (d.color == t.color) {
+			                same++;
+			            }
+			        }
+			    }
+			    if (neighbors > 0) {
+			        d.sameness = (same / neighbors);
+			    } else {
+			        d.sameness = 1;
+			    }
+			    if (self.sameness > BIAS && self.sameness < NONCONFORM) {
+			        self.shaking = true;
+			    }
+			    if (neighbors == 0) {
+			        empties.push(spot);
+			    }
+
+            }
 
 		}
 	}
