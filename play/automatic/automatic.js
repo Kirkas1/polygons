@@ -491,6 +491,7 @@ function step() {
 	    tspot = empties[Math.floor(Math.random() * empties.length)];
 	}
 	if (selectedAlgo == 1) {
+        var spots = []
 	    for (var j = 0; j < empties.length; j++) {
 	        spot = empties[j];
 	        var neighbors = 0;
@@ -512,16 +513,18 @@ function step() {
 	                shaker.sameness = 1;
 	            }
 	            if (shaker.sameness > BIAS && shaker.sameness < NONCONFORM) {
-	                tspot = spot;
+	                spots.push(spot);
 	            }
 	            if (neighbors == 0) {
-	                tspot = spot;
+	                spots.push(spot);
 	            }
 
 	        }
 
 
 	    }
+	    tspot = spots[Math.floor(Math.random() * spots.length)];
+
 	}
 	if (selectedAlgo == 2) {
 
