@@ -491,8 +491,8 @@ function step() {
 	    tspot = empties[Math.floor(Math.random() * empties.length)];
 	}
 	if (selectedAlgo == 1) {
-        var spots = []
 	    for (var j = 0; j < empties.length; j++) {
+	        var spots = []
 	        spot = empties[j];
 	        var neighbors = 0;
 	        var same = 0;
@@ -507,21 +507,18 @@ function step() {
 	                    same++;
 	                }
 	            }
-	            if (neighbors > 0) {
-	                shaker.sameness = (same / neighbors);
-	            } else {
-	                shaker.sameness = 1;
-	            }
-	            if (shaker.sameness > BIAS && shaker.sameness < NONCONFORM) {
-	                spots.push(spot);
-	            }
-	            if (neighbors == 0) {
-	                spots.push(spot);
-	            }
-
 	        }
-
-
+            if (neighbors > 0) {
+	            shaker.sameness = (same / neighbors);
+	        } else {
+	            shaker.sameness = 1;
+	        }
+	        if (shaker.sameness > BIAS && shaker.sameness < NONCONFORM) {
+	            tspot = spot
+	        }
+	        if (neighbors == 0) {
+	            tspot = spot;
+	        }
 	    }
 	    tspot = spots[Math.floor(Math.random() * spots.length)];
 
