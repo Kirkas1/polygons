@@ -520,7 +520,7 @@ function step() {
 	            tspot = spot;
 	        }
 	    }
-	    tspot = spots[Math.floor(Math.random() * spots.length)];
+	    //tspot = spots[Math.floor(Math.random() * spots.length)];
 
 	}
 	if (selectedAlgo == 2) {
@@ -543,6 +543,7 @@ function step() {
 	                    same++;
 	                }
 	            }
+	        }
 	            if (neighbors > 0) {
 	                shaker.sameness = (same / neighbors);
 	            } else {
@@ -552,7 +553,6 @@ function step() {
 	                thappy = false;
 	            }
 
-	        }
 	        for (var l = 0; l < neighborsa.length; l++) {
 	            var neigbors2 = 0;
 	            var same2 = 0;
@@ -567,6 +567,7 @@ function step() {
 	                        same2++;
 	                    }
 	                }
+	            }
 	                neigbors2++;
 	                if (neigborsa[l].color == shaker.color) {
 	                    same2++;
@@ -579,7 +580,7 @@ function step() {
 	                if (neighborsa[l].sameness < BIAS || neighborsa[l].sameness > NONCONFORM) {
 	                    thappy = false;
 	                }
-	            }
+	            
 	        }
 
 	    }
