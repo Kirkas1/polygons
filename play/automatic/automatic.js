@@ -478,44 +478,120 @@ function step() {
 				}
 			}
 
-			if(!spotTaken && selectedAlgo == 0){
+			if(!spotTaken){
 				empties.push(spot);
 			}
-			else if (!spotTaken && selectedAlgo == 1) {
-			    var neighbors = 0;
-			    var same = 0;
-			    for (var i = 0; i < draggables.length; i++) {
-			        var t = draggables[i];
-			        if (d == t) continue;
-			        if (dx * dx + dy * dy < DIAGONAL_SQUARED) {
-			            neighbors++;
-			            if (d.color == t.color) {
-			                same++;
-			            }
-			        }
-			    }
-			    if (neighbors > 0) {
-			        d.sameness = (same / neighbors);
-			    } else {
-			        d.sameness = 1;
-			    }
-			    if (self.sameness > BIAS && self.sameness < NONCONFORM) {
-			        self.shaking = true;
-			    }
-			    if (neighbors == 0) {
-			        empties.push(spot);
-			    }
-
-            }
 
 		}
 	}
 
-	// Go to a random empty spot
-	var spot = empties[Math.floor(Math.random()*empties.length)];
-	if(!spot) return;
-	shaker.gotoX = spot.x;
-	shaker.gotoY = spot.y;
+    // Go to a random empty spot
+	var tspot;
+	if (selectedAlgo == 0) {
+	    tspot = empties[Math.floor(Math.random() * empties.length)];
+	}
+	if (selectedAlgo == 1) {
+	    for (var j = 0; j < empties.length; j++) {
+	        var spots = []
+	        spot = empties[j];
+	        var neighbors = 0;
+	        var same = 0;
+	        for (var i = 0; i < draggables.length; i++) {
+	            var t = draggables[i];
+	            var tx = t.x - spot.x;
+	            var ty = t.y - spot.y;
+	            if (shaker == t) continue;
+	            if (tx * tx + ty * ty < DIAGONAL_SQUARED) {
+	                neighbors++;
+	                if (shaker.color == t.color) {
+	                    same++;
+	                }
+	            }
+	        }
+            if (neighbors > 0) {
+	            shaker.sameness = (same / neighbors);
+	        } else {
+	            shaker.sameness = 1;
+	        }
+	        if (shaker.sameness > BIAS && shaker.sameness < NONCONFORM) {
+	            tspot = spot
+	        }
+	        if (neighbors == 0) {
+	            tspot = spot;
+	        }
+	    }
+	    //tspot = spots[Math.floor(Math.random() * spots.length)];
+
+	}
+	if (selectedAlgo == 2) {
+
+	    for (var j = 0; j < empties.length; j++) {
+	        var neigbors = [];
+	        spot = empties[j];
+	        var neighborsa = 0;
+	        var same = 0;
+	        var thappy = true;
+	        for (var i = 0; i < draggables.length; i++) {
+	            var t = draggables[i];
+	            var tx = t.x - spot.x;
+	            var ty = t.y - spot.y;
+	            if (shaker == t) continue;
+	            if (tx * tx + ty * ty < DIAGONAL_SQUARED) {
+	                neighborsa.push(t);
+	                neighbors++;
+	                if (shaker.color == t.color) {
+	                    same++;
+	                }
+	            }
+	        }
+	            if (neighbors > 0) {
+	                shaker.sameness = (same / neighbors);
+	            } else {
+	                shaker.sameness = 1;
+	            }
+	            if (shaker.sameness < BIAS || shaker.sameness > NONCONFORM) {
+	                thappy = false;
+	            }
+
+	        for (var l = 0; l < neighborsa.length; l++) {
+	            var neigbors2 = 0;
+	            var same2 = 0;
+	            for (var i = 0; i < draggables.length; i++) {
+	                var t = draggables[i];
+	                var tx = t.x - neigborsa[l].x;
+	                var ty = t.y - neighborsa[l].y;
+	                if (shaker == t) continue;
+	                if (tx * tx + ty * ty < DIAGONAL_SQUARED) {
+	                    neighbors2++;
+	                    if (neigborsa[l].color == t.color) {
+	                        same2++;
+	                    }
+	                }
+	            }
+	                neigbors2++;
+	                if (neigborsa[l].color == shaker.color) {
+	                    same2++;
+	                }
+	                if (neighbors2 > 0) {
+	                    neighborsa[l].sameness = (same2 / neighbors2);
+	                } else {
+	                    neighborsa[l].sameness = 1;
+	                }
+	                if (neighborsa[l].sameness < BIAS || neighborsa[l].sameness > NONCONFORM) {
+	                    thappy = false;
+	                }
+	            
+	        }
+
+	    }
+	    
+	    if (thappy == true) {
+	        tspot = spot;
+	    }
+	}
+	if(!tspot) return;
+	shaker.gotoX = tspot.x;
+	shaker.gotoY = tspot.y;
 
 }
 
